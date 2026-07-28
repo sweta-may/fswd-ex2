@@ -1,16 +1,27 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const loginForm = document.getElementById('login-form');
+﻿document.addEventListener('DOMContentLoaded', function () {
+    const redirect = function () {
+        localStorage.setItem('loggedIn', 'true');
+        window.location.href = 'index.html';
+    };
 
-  loginForm.addEventListener('submit', function (event) {
-    event.preventDefault();
+    const phoneBtn = document.getElementById('phone-btn');
+    const googleBtn = document.getElementById('google-btn');
+    const appleBtn = document.getElementById('apple-btn');
+    const loginForm = document.getElementById('login-form');
 
-    // Simulate a successful login and save state.
-    localStorage.setItem('loggedIn', 'true');
-    window.location.href = 'index.html';
-  });
+    if (phoneBtn) phoneBtn.addEventListener('click', redirect);
+    if (googleBtn) googleBtn.addEventListener('click', redirect);
+    if (appleBtn) appleBtn.addEventListener('click', redirect);
 
-  const loggedIn = localStorage.getItem('loggedIn');
-  if (loggedIn === 'true') {
-    window.location.href = 'index.html';
-  }
+    if (loginForm) {
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            redirect();
+        });
+    }
+
+    const loggedIn = localStorage.getItem('loggedIn');
+    if (loggedIn === 'true') {
+        window.location.href = 'index.html';
+    }
 });
