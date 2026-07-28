@@ -7,11 +7,11 @@ body {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     background: #000;
     color: #fff;
     font-family: Inter, Arial, sans-serif;
-    padding: 24px;
+    padding: 24px 16px;
 }
 
 .login-container {
@@ -40,14 +40,14 @@ form {
     width: 100%;
     display: inline-flex;
     align-items: center;
-    justify-content: start;
-    gap: 14px;
-    padding: 16px 20px;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px 16px;
     border-radius: 999px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     background: rgba(255, 255, 255, 0.95);
     color: #111;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -71,6 +71,10 @@ form {
     font-size: 1rem;
 }
 
+.btn-label {
+    display: inline-block;
+    text-align: center;
+}
 .google-icon {
     width: 36px;
     height: 36px;
@@ -125,3 +129,181 @@ input::placeholder {
     height: 1px;
     background: rgba(255, 255, 255, 0.16);
 }
+
+/* Index page styles */
+.index-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #000;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    gap: 24px;
+}
+
+.index-main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.index-footer {
+    margin-top: 24px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 28px;
+    background: #050505;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 900px) {
+    .index-wrapper {
+        padding: 16px;
+    }
+
+    .index-footer {
+        margin-top: 24px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .footer-btn {
+        flex: 1 1 48%;
+        min-width: 120px;
+    }
+}
+
+.footer-btn {
+    flex: 1;
+    height: 52px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    border: none;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.footer-btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-1px);
+}
+
+.footer-btn.new-post {
+    flex: 1.2;
+    height: 60px;
+    background: #1d9bf0;
+    color: #fff;
+    box-shadow: 0 14px 35px rgba(29, 155, 240, 0.25);
+}
+
+.top-search {
+    display: flex;
+    justify-content: center;
+    padding: 12px 0;
+}
+
+.search-input-wrapper {
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.search-icon {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+}
+
+.search-input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: #fff;
+    outline: none;
+    font-size: 0.95rem;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.tabs {
+    display: flex;
+    gap: 16px;
+    padding: 12px 16px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.tab-item {
+    flex: 1;
+    padding: 12px 0;
+    border-radius: 999px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.tab-item.active {
+    background: #1d9bf0;
+    color: #fff;
+}
+
+.feed-card {
+    padding: 24px;
+    border-radius: 24px;
+    background: #050505;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.feed-card h2 {
+    margin-bottom: 14px;
+    font-size: 1.5rem;
+}
+
+.feed-card p {
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+    .index-wrapper {
+        flex-direction: column;
+        padding: 16px;
+    }
+
+    .index-main {
+        margin-left: 0;
+    }
+
+    .index-footer {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .footer-btn {
+        flex: 1 1 48%;
+        min-width: 120px;
+    }
+}
+
