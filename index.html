@@ -1,293 +1,330 @@
-﻿<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+﻿<!doctype html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <title>Home</title> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontisto/3.0.4/css/fontisto.min.css" integrity="sha512-BK7gVjtpI03rzn2PXIJKa2Eq2GehYBWEzEFt0L2rXtjEQ4EYuYulpnrDCclBv7dzfD0mJ0M7jYNE63FVMKVa7g==" crossorigin="anonymous" referrerpolicy="no-referrer" > <link rel="stylesheet" href="styles.css"> </head> <body> <div class="app"> <!-- LEFT SIDEBAR --> <aside class="sidebar">
+<div class="brand">
+  <span class="brand-x">𝕏</span>
+</div>
 
-  <title>Home</title>
+<nav class="side-nav">
 
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/fontisto/3.0.4/css/fontisto.min.css"
-    integrity="sha512-BK7gVjtpI03rzn2PXIJKa2Eq2GehYBWEzEFt0L2rXtjEQ4EYuYulpnrDCclBv7dzfD0mJ0M7jYNE63FVMKVa7g=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  >
+  <button class="nav-item active" data-page="home">
+    <i class="fi fi-rr-home"></i>
+    <span>Home</span>
+  </button>
 
-  <link rel="stylesheet" href="styles.css">
-</head>
+  <button class="nav-item" data-page="explore">
+    <i class="fi fi-br-search"></i>
+    <span>Explore</span>
+  </button>
 
-<body>
+  <button class="nav-item" data-page="notifications">
+    <i class="fi fi-rr-bell"></i>
+    <span>Notifications</span>
+  </button>
 
-<div class="app">
+  <button class="nav-item" data-page="messages">
+    <i class="fi fi-rr-paper-plane"></i>
+    <span>Messages</span>
+    <span class="message-badge" id="message-badge">0</span>
+  </button>
 
-  <!-- LEFT SIDEBAR -->
-  <aside class="sidebar">
+  <button class="nav-item" data-page="bookmarks">
+    <i class="fi fi-rr-bookmark"></i>
+    <span>Bookmarks</span>
+  </button>
 
-    <div class="brand">
-      <span class="brand-x">𝕏</span>
+  <button class="nav-item" data-page="profile">
+    <i class="fi fi-rr-user"></i>
+    <span>Profile</span>
+  </button>
+
+</nav>
+
+<button class="sidebar-post" id="sidebar-post">
+  Post
+</button>
+
+<button class="account-area" id="logout-btn">
+  <div class="avatar">A</div>
+
+  <div class="account-info">
+    <strong>Sweta</strong>
+    <span>@sweta</span>
+  </div>
+
+  <span class="more">•••</span>
+</button>
+
+</aside> <!-- MAIN CONTENT --> <main class="main">
+<!-- MOBILE HEADER -->
+<header class="mobile-header">
+  <div class="avatar small-avatar">A</div>
+  <strong id="mobile-page-title">Home</strong>
+  <span class="brand-x">𝕏</span>
+</header>
+
+
+<!-- HOME PAGE -->
+<div id="home-page" class="page">
+
+  <!-- SEARCH -->
+  <section class="top-search">
+
+    <div class="search-input-wrapper">
+
+      <i class="fi fi-br-search search-icon"></i>
+
+      <input
+        class="search-input"
+        id="search-input"
+        type="search"
+        placeholder="Search"
+        autocomplete="off"
+      >
+
     </div>
 
-    <nav class="side-nav">
+  </section>
 
-      <button class="nav-item active">
-        <i class="fi fi-rr-home"></i>
-        <span>Home</span>
-      </button>
 
-      <button class="nav-item">
-        <i class="fi fi-br-search"></i>
-        <span>Explore</span>
-      </button>
+  <!-- TABS -->
+  <section class="tabs">
 
-      <button class="nav-item">
-        <i class="fi fi-rr-bell"></i>
-        <span>Notifications</span>
-      </button>
-
-      <button class="nav-item">
-        <i class="fi fi-rr-paper-plane"></i>
-        <span>Messages</span>
-      </button>
-
-      <button class="nav-item">
-        <i class="fi fi-rr-bookmark"></i>
-        <span>Bookmarks</span>
-      </button>
-
-      <button class="nav-item">
-        <i class="fi fi-rr-user"></i>
-        <span>Profile</span>
-      </button>
-
-    </nav>
-
-    <button class="sidebar-post" id="sidebar-post">
-      Post
+    <button class="tab-item active" data-tab="for-you">
+      For you
     </button>
 
-    <button class="account-area" id="logout-btn">
-      <div class="avatar">A</div>
-
-      <div class="account-info">
-        <strong>Sweta</strong>
-        <span>@sweta</span>
-      </div>
-
-      <span class="more">•••</span>
+    <button class="tab-item" data-tab="following">
+      Following
     </button>
 
-  </aside>
+  </section>
 
 
-  <!-- MAIN CONTENT -->
-  <main class="main">
+  <!-- COMPOSER -->
+  <section class="composer">
 
-    <!-- MOBILE HEADER -->
-    <header class="mobile-header">
-      <div class="avatar small-avatar">A</div>
-      <strong>Home</strong>
-      <span class="brand-x">𝕏</span>
-    </header>
+    <div class="avatar">A</div>
 
+    <div class="composer-content">
 
-    <!-- SEARCH -->
-    <section class="top-search">
+      <textarea
+        id="post-input"
+        placeholder="What is happening?!"
+        maxlength="280"
+        rows="2"
+      ></textarea>
 
-      <div class="search-input-wrapper">
+      <div class="composer-bottom">
 
-        <i class="fi fi-br-search search-icon"></i>
+        <div class="composer-icons">
 
-        <input
-          class="search-input"
-          id="search-input"
-          type="search"
-          placeholder="Search"
-          autocomplete="off"
-        >
+          <button title="Add image">
+            <i class="fi fi-rr-picture"></i>
+          </button>
 
-      </div>
+          <button title="Add GIF">
+            <i class="fi fi-rr-play"></i>
+          </button>
 
-    </section>
+          <button title="Add emoji">
+            <i class="fi fi-rr-smile"></i>
+          </button>
 
-
-    <!-- TABS -->
-    <section class="tabs">
-
-      <button class="tab-item active" data-tab="for-you">
-        For you
-      </button>
-
-      <button class="tab-item" data-tab="following">
-        Following
-      </button>
-
-    </section>
-
-
-    <!-- COMPOSER -->
-    <section class="composer">
-
-      <div class="avatar">A</div>
-
-      <div class="composer-content">
-
-        <textarea
-          id="post-input"
-          placeholder="What is happening?!"
-          maxlength="280"
-          rows="2"
-        ></textarea>
-
-        <div class="composer-bottom">
-
-          <div class="composer-icons">
-            <button title="Add image">
-              <i class="fi fi-rr-picture"></i>
-            </button>
-
-            <button title="Add GIF">
-              <i class="fi fi-rr-play"></i>
-            </button>
-
-            <button title="Add emoji">
-              <i class="fi fi-rr-smile"></i>
-            </button>
-
-            <button title="Add location">
-              <i class="fi fi-rr-marker"></i>
-            </button>
-          </div>
-
-          <button id="post-btn" class="post-btn" disabled>
-            Post
+          <button title="Add location">
+            <i class="fi fi-rr-marker"></i>
           </button>
 
         </div>
 
-      </div>
+        <button id="post-btn" class="post-btn" disabled>
+          Post
+        </button>
 
-    </section>
-
-
-    <!-- FEED -->
-    <section id="feed" class="feed">
-
-      <!-- POSTS ARE INSERTED BY JAVASCRIPT -->
-
-    </section>
-
-  </main>
-
-
-  <!-- RIGHT SIDEBAR -->
-  <aside class="right-sidebar">
-
-    <div class="trends-box">
-
-      <h2>What's happening</h2>
-
-      <div class="trend">
-        <span>Trending</span>
-        <strong>#Technology</strong>
-        <small>24.8K posts</small>
-      </div>
-
-      <div class="trend">
-        <span>Trending in Technology</span>
-        <strong>Artificial Intelligence</strong>
-        <small>18.2K posts</small>
-      </div>
-
-      <div class="trend">
-        <span>Trending</span>
-        <strong>#WebDevelopment</strong>
-        <small>12.4K posts</small>
-      </div>
-
-      <div class="trend">
-        <span>Trending</span>
-        <strong>JavaScript</strong>
-        <small>9,821 posts</small>
-      </div>
-
-      <button class="show-more">
-        Show more
-      </button>
-
-    </div>
-
-
-    <div class="follow-box">
-
-      <h2>Who to follow</h2>
-
-      <div class="follow-user">
-        <div class="avatar">S</div>
-
-        <div>
-          <strong>Sahana Radhakrishnan</strong>
-          <span>@sahanar</span>
-        </div>
-
-        <button>Follow</button>
-      </div>
-
-      <div class="follow-user">
-        <div class="avatar">D</div>
-
-        <div>
-          <strong>Sowmiya Lakshmi</strong>
-          <span>@sowmi</span>
-        </div>
-
-        <button>Follow</button>
-      </div>
-
-      <div class="follow-user">
-        <div class="avatar">M</div>
-
-        <div>
-          <strong>Oviyaa SM</strong>
-          <span>@oviyaasm</span>
-        </div>
-
-        <button>Follow</button>
       </div>
 
     </div>
 
-  </aside>
+  </section>
 
 
-  <!-- MOBILE BOTTOM NAV -->
-  <footer class="mobile-footer">
-
-    <button class="footer-btn active">
-      <i class="fi fi-rr-home"></i>
-    </button>
-
-    <button class="footer-btn">
-      <i class="fi fi-br-search"></i>
-    </button>
-
-    <button class="footer-btn new-post" id="mobile-post">
-      <i class="fi fi-rr-edit"></i>
-    </button>
-
-    <button class="footer-btn">
-      <i class="fi fi-rr-bell"></i>
-    </button>
-
-    <button class="footer-btn">
-      <i class="fi fi-rr-user"></i>
-    </button>
-
-  </footer>
+  <!-- FEED -->
+  <section id="feed" class="feed"></section>
 
 </div>
 
-<script src="script.js"></script>
 
-</body>
-</html>
+<!-- MESSAGES PAGE -->
+<div id="messages-page" class="page hidden-page">
+
+  <div class="page-header">
+    <h1>Messages</h1>
+  </div>
+
+  <div id="messages-list" class="messages-list">
+
+    <div class="empty-messages">
+      <i class="fi fi-rr-paper-plane"></i>
+      <h2>Your messages</h2>
+      <p>
+        When someone you follow sends you a message,
+        it will appear here.
+      </p>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- SIMPLE OTHER PAGES -->
+<div id="explore-page" class="page hidden-page">
+  <div class="page-header">
+    <h1>Explore</h1>
+  </div>
+
+  <div class="simple-page">
+    <i class="fi fi-br-search"></i>
+    <h2>Explore</h2>
+    <p>Discover what's happening on X.</p>
+  </div>
+</div>
+
+
+<div id="notifications-page" class="page hidden-page">
+  <div class="page-header">
+    <h1>Notifications</h1>
+  </div>
+  <div id="notifications-list" class="notifications-list"></div>
+</div>
+
+
+<div id="bookmarks-page" class="page hidden-page">
+  <div class="page-header">
+    <h1>Bookmarks</h1>
+  </div>
+
+  <div class="simple-page">
+    <i class="fi fi-rr-bookmark"></i>
+    <h2>Bookmarks</h2>
+    <p>Your saved posts will appear here.</p>
+  </div>
+</div>
+
+
+<div id="profile-page" class="page hidden-page">
+  <div class="page-header">
+    <h1>Profile</h1>
+  </div>
+  <div id="profile-content" class="profile-content"></div>
+</div>
+
+<!-- OPENED USER PROFILE -->
+<div id="user-profile-page" class="page hidden-page">
+  <div class="profile-topbar">
+    <button id="profile-back-btn" class="profile-back-btn" title="Back">
+      <i class="fi fi-rr-arrow-left"></i>
+    </button>
+    <strong>Profile</strong>
+  </div>
+  <div id="user-profile-content" class="user-profile-content"></div>
+</div>
+
+</main> <!-- RIGHT SIDEBAR --> <aside class="right-sidebar">
+<div class="trends-box">
+
+  <h2>What's happening</h2>
+
+  <div class="trend">
+    <span>Trending</span>
+    <strong>#Technology</strong>
+    <small>24.8K posts</small>
+  </div>
+
+  <div class="trend">
+    <span>Trending in Technology</span>
+    <strong>Artificial Intelligence</strong>
+    <small>18.2K posts</small>
+  </div>
+
+  <div class="trend">
+    <span>Trending</span>
+    <strong>#WebDevelopment</strong>
+    <small>12.4K posts</small>
+  </div>
+
+  <div class="trend">
+    <span>Trending</span>
+    <strong>JavaScript</strong>
+    <small>9,821 posts</small>
+  </div>
+
+  <button class="show-more">
+    Show more
+  </button>
+
+</div>
+
+
+<!-- WHO TO FOLLOW -->
+<div class="follow-box">
+
+  <h2>Who to follow</h2>
+
+  <div class="follow-user" data-name="Sahana Radhakrishnan" data-username="@sahanar">
+    <div class="avatar">S</div>
+
+    <div>
+      <strong>Sahana Radhakrishnan</strong>
+      <span>@sahanar</span>
+    </div>
+
+    <button class="follow-btn">Follow</button>
+  </div>
+
+
+  <div class="follow-user" data-name="Sowmiya Lakshmi" data-username="@sowmi">
+    <div class="avatar">S</div>
+
+    <div>
+      <strong>Sowmiya Lakshmi</strong>
+      <span>@sowmi</span>
+    </div>
+
+    <button class="follow-btn">Follow</button>
+  </div>
+
+
+  <div class="follow-user" data-name="Oviyaa SM" data-username="@oviyaasm">
+    <div class="avatar">O</div>
+
+    <div>
+      <strong>Oviyaa SM</strong>
+      <span>@oviyaasm</span>
+    </div>
+
+    <button class="follow-btn">Follow</button>
+  </div>
+
+</div>
+
+</aside> <!-- MOBILE BOTTOM NAV --> <footer class="mobile-footer">
+<button class="footer-btn active" data-page="home">
+  <i class="fi fi-rr-home"></i>
+</button>
+
+<button class="footer-btn" data-page="explore">
+  <i class="fi fi-br-search"></i>
+</button>
+
+<button class="footer-btn new-post" id="mobile-post">
+  <i class="fi fi-rr-edit"></i>
+</button>
+
+<button class="footer-btn" data-page="notifications">
+  <i class="fi fi-rr-bell"></i>
+</button>
+
+<button class="footer-btn" data-page="messages">
+  <i class="fi fi-rr-paper-plane"></i>
+</button>
+
+</footer> </div> <script src="script.js"></script> </body> </html>
