@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* =========================
+  /* =====================================================
      LOGIN PROTECTION
-  ========================= */
+  ===================================================== */
 
   if (localStorage.getItem("loggedIn") !== "true") {
     window.location.href = "login.html";
@@ -10,9 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =========================
+  /* =====================================================
      ELEMENTS
-  ========================= */
+  ===================================================== */
 
   const feed = document.getElementById("feed");
   const postInput = document.getElementById("post-input");
@@ -24,11 +24,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const mobilePost = document.getElementById("mobile-post");
   const sidebarPost = document.getElementById("sidebar-post");
-
   const logoutBtn = document.getElementById("logout-btn");
 
   const notificationsList =
     document.getElementById("notifications-list");
+
+  const messagesList =
+    document.getElementById("messages-list");
 
   const profileContent =
     document.getElementById("profile-content");
@@ -45,9 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let previousPage = "home";
 
 
-  /* =========================
+  /* =====================================================
      DEFAULT POSTS
-  ========================= */
+  ===================================================== */
 
   const defaultPosts = [
 
@@ -55,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       id: 1,
       name: "Sahana Radhakrishnan",
       username: "@sahanar",
-      avatar: "A",
+      avatar: "S",
       verified: true,
       text:
         "Building something new today. Sometimes the smallest ideas turn into the biggest projects. 🚀",
@@ -91,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
       id: 3,
       name: "Oviyaa SM",
       username: "@oviyaasm",
-      avatar: "D",
+      avatar: "O",
       verified: false,
       text:
         "What's one technology you think will completely change the way we work over the next five years?",
@@ -113,9 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
     defaultPosts;
 
 
-  /* =========================
+  /* =====================================================
      USERS
-  ========================= */
+  ===================================================== */
 
   const defaultUsers = [
 
@@ -163,9 +165,9 @@ document.addEventListener("DOMContentLoaded", () => {
     defaultUsers;
 
 
-  /* =========================
-     NOTIFICATIONS
-  ========================= */
+  /* =====================================================
+     NOTIFICATIONS / MESSAGES
+  ===================================================== */
 
   let notifications =
     JSON.parse(
@@ -173,9 +175,9 @@ document.addEventListener("DOMContentLoaded", () => {
     ) || [];
 
 
-  /* =========================
+  /* =====================================================
      SAVE DATA
-  ========================= */
+  ===================================================== */
 
   function savePosts() {
 
@@ -207,9 +209,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =========================
+  /* =====================================================
      CURRENT USER
-  ========================= */
+  ===================================================== */
 
   function getCurrentUsername() {
 
@@ -233,9 +235,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =========================
+  /* =====================================================
      FIND USER
-  ========================= */
+  ===================================================== */
 
   function getUserByUsername(username) {
 
@@ -273,8 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         followers:
           Number(
-            localStorage.getItem("myFollowers") ||
-            0
+            localStorage.getItem("myFollowers") || 0
           ),
 
         following:
@@ -303,9 +304,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =========================
+  /* =====================================================
      FORMAT NUMBERS
-  ========================= */
+  ===================================================== */
 
   function formatNumber(number) {
 
@@ -332,47 +333,33 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =========================
+  /* =====================================================
      ESCAPE HTML
-  ========================= */
+  ===================================================== */
 
   function escapeHTML(value) {
 
     return String(value)
 
-      .replaceAll(
-        "&",
-        "&amp;"
-      )
-
-      .replaceAll(
-        "<",
-        "&lt;"
-      )
-
-      .replaceAll(
-        ">",
-        "&gt;"
-      )
-
-      .replaceAll(
-        '"',
-        "&quot;"
-      )
-
-      .replaceAll(
-        "'",
-        "&#039;"
-      );
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
 
   }
 
 
-  /* =========================
-     RENDER FEED
-  ========================= */
+  /* =====================================================
+     RENDER POSTS
+  ===================================================== */
 
   function renderPosts(list = posts) {
+
+    if (!feed) {
+      return;
+    }
+
 
     feed.innerHTML = "";
 
@@ -463,9 +450,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             <button class="post-more">
-
               •••
-
             </button>
 
           </div>
@@ -580,11 +565,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =========================
+  /* =====================================================
      CREATE POST
-  ========================= */
+  ===================================================== */
 
   function createPost() {
+
+    if (!postInput) {
+      return;
+    }
+
 
     const text =
       postInput.value.trim();
@@ -648,280 +638,298 @@ document.addEventListener("DOMContentLoaded", () => {
 
     postInput.value = "";
 
-    postBtn.disabled = true;
+    if (postBtn) {
+      postBtn.disabled = true;
+    }
 
   }
 
 
-  /* =========================
+  /* =====================================================
      POST INPUT
-  ========================= */
+  ===================================================== */
 
-  postInput.addEventListener(
-    "input",
-    () => {
+  if (postInput && postBtn) {
 
-      const hasText =
-        postInput.value.trim().length > 0;
+    postInput.addEventListener(
+      "input",
+      () => {
 
+        const hasText =
+          postInput.value.trim().length > 0;
 
-      postBtn.disabled =
-        !hasText;
+        postBtn.disabled =
+          !hasText;
 
-    }
-  );
-
-
-  postBtn.addEventListener(
-    "click",
-    createPost
-  );
+      }
+    );
 
 
-  /* =========================
+    postBtn.addEventListener(
+      "click",
+      createPost
+    );
+
+  }
+
+
+  /* =====================================================
      FEED ACTIONS
-  ========================= */
+  ===================================================== */
 
-  feed.addEventListener(
-    "click",
-    event => {
+  if (feed) {
 
-      /* PROFILE CLICK */
+    feed.addEventListener(
+      "click",
+      event => {
 
-      const profileLink =
-        event.target.closest(
-          ".post-user-link"
-        );
+        /* PROFILE */
 
-
-      if (profileLink) {
-
-        event.preventDefault();
-
-        event.stopPropagation();
-
-        openUserProfile(
-          profileLink.dataset.username
-        );
-
-        return;
-
-      }
-
-
-      /* POST ACTION */
-
-      const button =
-        event.target.closest(
-          ".post-action"
-        );
-
-
-      if (!button) {
-        return;
-      }
-
-
-      const id =
-        Number(button.dataset.id);
-
-
-      const post =
-        posts.find(
-          item => item.id === id
-        );
-
-
-      if (!post) {
-        return;
-      }
-
-
-      /* LIKE */
-
-      if (
-        button.classList.contains("like")
-      ) {
-
-        post.liked =
-          !post.liked;
-
-        post.likes +=
-          post.liked
-            ? 1
-            : -1;
-
-      }
-
-
-      /* REPOST */
-
-      if (
-        button.classList.contains(
-          "repost"
-        )
-      ) {
-
-        post.reposted =
-          !post.reposted;
-
-        post.reposts +=
-          post.reposted
-            ? 1
-            : -1;
-
-      }
-
-
-      /* BOOKMARK */
-
-      if (
-        button.classList.contains(
-          "bookmark"
-        )
-      ) {
-
-        post.bookmarked =
-          !post.bookmarked;
-
-      }
-
-
-      /* REPLY */
-
-      if (
-        button.classList.contains(
-          "reply"
-        )
-      ) {
-
-        const reply =
-          prompt(
-            "Write your reply:"
+        const profileLink =
+          event.target.closest(
+            ".post-user-link"
           );
 
 
-        if (
-          reply &&
-          reply.trim()
-        ) {
+        if (profileLink) {
 
-          post.replies++;
+          event.preventDefault();
 
-          alert(
-            "Reply posted!"
+          event.stopPropagation();
+
+          openUserProfile(
+            profileLink.dataset.username
           );
 
+          return;
+
         }
 
-      }
+
+        /* POST ACTION */
+
+        const button =
+          event.target.closest(
+            ".post-action"
+          );
 
 
-      /* SHARE */
+        if (!button) {
+          return;
+        }
 
-      if (
-        button.classList.contains(
-          "share"
-        )
-      ) {
 
-        const shareText =
-          `${post.name}: ${post.text}`;
+        const id =
+          Number(button.dataset.id);
 
+
+        const post =
+          posts.find(
+            item =>
+              item.id === id
+          );
+
+
+        if (!post) {
+          return;
+        }
+
+
+        /* LIKE */
 
         if (
-          navigator.share
+          button.classList.contains(
+            "like"
+          )
         ) {
 
-          navigator.share({
+          post.liked =
+            !post.liked;
 
-            title: "Post",
-
-            text: shareText
-
-          });
+          post.likes +=
+            post.liked
+              ? 1
+              : -1;
 
         }
 
-        else {
 
-          navigator.clipboard
-            .writeText(shareText)
-            .then(() => {
+        /* REPOST */
 
-              alert(
-                "Post copied to clipboard."
-              );
+        if (
+          button.classList.contains(
+            "repost"
+          )
+        ) {
+
+          post.reposted =
+            !post.reposted;
+
+          post.reposts +=
+            post.reposted
+              ? 1
+              : -1;
+
+        }
+
+
+        /* BOOKMARK */
+
+        if (
+          button.classList.contains(
+            "bookmark"
+          )
+        ) {
+
+          post.bookmarked =
+            !post.bookmarked;
+
+        }
+
+
+        /* REPLY */
+
+        if (
+          button.classList.contains(
+            "reply"
+          )
+        ) {
+
+          const reply =
+            prompt(
+              "Write your reply:"
+            );
+
+
+          if (
+            reply &&
+            reply.trim()
+          ) {
+
+            post.replies++;
+
+            alert(
+              "Reply posted!"
+            );
+
+          }
+
+        }
+
+
+        /* SHARE */
+
+        if (
+          button.classList.contains(
+            "share"
+          )
+        ) {
+
+          const shareText =
+            `${post.name}: ${post.text}`;
+
+
+          if (
+            navigator.share
+          ) {
+
+            navigator.share({
+
+              title: "Post",
+
+              text: shareText
 
             });
 
+          } else {
+
+            navigator.clipboard
+              .writeText(
+                shareText
+              )
+              .then(() => {
+
+                alert(
+                  "Post copied to clipboard."
+                );
+
+              });
+
+          }
+
         }
 
-      }
 
-
-      savePosts();
-
-      renderPosts();
-
-    }
-  );
-
-
-  /* =========================
-     SEARCH
-  ========================= */
-
-  searchInput.addEventListener(
-    "input",
-    () => {
-
-      const query =
-        searchInput.value
-          .trim()
-          .toLowerCase();
-
-
-      if (!query) {
+        savePosts();
 
         renderPosts();
 
-        return;
-
       }
+    );
+
+  }
 
 
-      const filtered =
-        posts.filter(post =>
+  /* =====================================================
+     SEARCH
+  ===================================================== */
 
-          post.text
-            .toLowerCase()
-            .includes(query)
+  if (searchInput) {
 
-          ||
+    searchInput.addEventListener(
+      "input",
+      () => {
 
-          post.name
-            .toLowerCase()
-            .includes(query)
+        const query =
+          searchInput.value
+            .trim()
+            .toLowerCase();
 
-          ||
 
-          post.username
-            .toLowerCase()
-            .includes(query)
+        if (!query) {
 
+          renderPosts();
+
+          return;
+
+        }
+
+
+        const filtered =
+          posts.filter(
+            post =>
+
+              post.text
+                .toLowerCase()
+                .includes(query)
+
+              ||
+
+              post.name
+                .toLowerCase()
+                .includes(query)
+
+              ||
+
+              post.username
+                .toLowerCase()
+                .includes(query)
+          );
+
+
+        renderPosts(
+          filtered
         );
 
+      }
+    );
 
-      renderPosts(filtered);
-
-    }
-  );
+  }
 
 
-  /* =========================
+  /* =====================================================
      HOME TABS
-  ========================= */
+  ===================================================== */
 
   tabs.forEach(tab => {
 
@@ -929,10 +937,11 @@ document.addEventListener("DOMContentLoaded", () => {
       "click",
       () => {
 
-        tabs.forEach(item =>
-          item.classList.remove(
-            "active"
-          )
+        tabs.forEach(
+          item =>
+            item.classList.remove(
+              "active"
+            )
         );
 
 
@@ -956,9 +965,7 @@ document.addEventListener("DOMContentLoaded", () => {
             )
           );
 
-        }
-
-        else {
+        } else {
 
           renderPosts();
 
@@ -970,13 +977,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  /* =========================
-     FOLLOW NOTIFICATION
-  ========================= */
+  /* =====================================================
+     FOLLOW -> MESSAGE
+  ===================================================== */
 
   function addFollowNotification(user) {
 
-    notifications.unshift({
+    const message = {
 
       id: Date.now(),
 
@@ -986,11 +993,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       name: user.name,
 
-      username:
-        user.username,
+      username: user.username,
 
-      avatar:
-        user.avatar,
+      avatar: user.avatar,
 
       text:
         `You followed ${user.name}.`,
@@ -999,21 +1004,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
       read: false
 
-    });
+    };
+
+
+    notifications.unshift(
+      message
+    );
 
 
     saveNotifications();
 
     renderNotifications();
 
+    renderMessages();
+
     updateMessageBadge();
 
   }
 
 
-  /* =========================
+  /* =====================================================
      RENDER NOTIFICATIONS
-  ========================= */
+  ===================================================== */
 
   function renderNotifications() {
 
@@ -1084,29 +1096,38 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="notification-content">
 
             <strong>
+
               ${escapeHTML(
                 notification.name
               )}
+
             </strong>
 
+
             <span>
+
               ${escapeHTML(
                 notification.username
               )}
+
             </span>
 
 
             <p>
+
               ${escapeHTML(
                 notification.text
               )}
+
             </p>
 
 
             <small>
+
               ${escapeHTML(
                 notification.time
               )}
+
             </small>
 
           </div>
@@ -1136,9 +1157,175 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =========================
+  /* =====================================================
+     RENDER MESSAGES
+  ===================================================== */
+
+  function renderMessages() {
+
+    if (!messagesList) {
+      return;
+    }
+
+
+    messagesList.innerHTML = "";
+
+
+    if (
+      notifications.length === 0
+    ) {
+
+      messagesList.innerHTML = `
+
+        <div class="empty-messages">
+
+          <i class="fi fi-rr-paper-plane"></i>
+
+          <h2>
+            Your messages
+          </h2>
+
+          <p>
+            When you follow someone,
+            your interaction will
+            appear here.
+          </p>
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    notifications.forEach(
+      message => {
+
+        const item =
+          document.createElement(
+            "div"
+          );
+
+
+        item.className =
+          "message-item";
+
+
+        item.innerHTML = `
+
+          <div class="avatar message-avatar">
+
+            ${escapeHTML(
+              message.avatar
+            )}
+
+          </div>
+
+
+          <div class="message-info">
+
+            <div class="message-header">
+
+              <strong>
+
+                ${escapeHTML(
+                  message.name
+                )}
+
+              </strong>
+
+
+              <span>
+
+                ${escapeHTML(
+                  message.username
+                )}
+
+              </span>
+
+
+              <small>
+
+                ${escapeHTML(
+                  message.time
+                )}
+
+              </small>
+
+            </div>
+
+
+            <p>
+
+              ${escapeHTML(
+                message.text
+              )}
+
+            </p>
+
+          </div>
+
+
+          <button
+            class="message-profile-btn"
+            data-username="${escapeHTML(
+              message.username
+            )}"
+          >
+
+            View
+
+          </button>
+
+        `;
+
+
+        messagesList.appendChild(
+          item
+        );
+
+      }
+    );
+
+  }
+
+
+  /* =====================================================
+     MESSAGE PROFILE CLICK
+  ===================================================== */
+
+  if (messagesList) {
+
+    messagesList.addEventListener(
+      "click",
+      event => {
+
+        const button =
+          event.target.closest(
+            ".message-profile-btn"
+          );
+
+
+        if (!button) {
+          return;
+        }
+
+
+        openUserProfile(
+          button.dataset.username
+        );
+
+      }
+    );
+
+  }
+
+
+  /* =====================================================
      MESSAGE BADGE
-  ========================= */
+  ===================================================== */
 
   function updateMessageBadge() {
 
@@ -1172,9 +1359,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =========================
+  /* =====================================================
      MARK NOTIFICATIONS READ
-  ========================= */
+  ===================================================== */
 
   function markNotificationsRead() {
 
@@ -1199,9 +1386,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =========================
+  /* =====================================================
      GET USER POSTS
-  ========================= */
+  ===================================================== */
 
   function getUserPosts(user) {
 
@@ -1228,9 +1415,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =========================
+  /* =====================================================
      RENDER USER PROFILE
-  ========================= */
+  ===================================================== */
 
   function renderUserProfile(user) {
 
@@ -1314,9 +1501,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
           <h2>
+
             ${escapeHTML(
               user.name
             )}
+
           </h2>
 
 
@@ -1421,21 +1610,29 @@ document.addEventListener("DOMContentLoaded", () => {
                         >
 
                           <strong>
+
                             ${escapeHTML(
                               post.name
                             )}
+
                           </strong>
 
+
                           <span>
+
                             ${escapeHTML(
                               post.username
                             )}
+
                           </span>
 
+
                           <span>
+
                             · ${escapeHTML(
                               post.time
                             )}
+
                           </span>
 
                         </div>
@@ -1524,9 +1721,7 @@ document.addEventListener("DOMContentLoaded", () => {
             target
           );
 
-        }
-
-        else {
+        } else {
 
           target.followers =
             Math.max(
@@ -1547,6 +1742,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
           renderNotifications();
 
+          renderMessages();
+
           updateMessageBadge();
 
         }
@@ -1566,13 +1763,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =========================
+  /* =====================================================
      OPEN USER PROFILE
-  ========================= */
+  ===================================================== */
 
-  function openUserProfile(
-    username
-  ) {
+  function openUserProfile(username) {
 
     const user =
       getUserByUsername(
@@ -1619,9 +1814,13 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
 
-    userProfilePage.classList.remove(
-      "hidden-page"
-    );
+    if (userProfilePage) {
+
+      userProfilePage.classList.remove(
+        "hidden-page"
+      );
+
+    }
 
 
     renderUserProfile(
@@ -1640,9 +1839,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =========================
-     FOLLOW BUTTONS
-  ========================= */
+  /* =====================================================
+     UPDATE FOLLOW BUTTONS
+  ===================================================== */
 
   function updateFollowButtons() {
 
@@ -1695,9 +1894,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =========================
+  /* =====================================================
      WHO TO FOLLOW
-  ========================= */
+  ===================================================== */
 
   document
     .querySelectorAll(
@@ -1712,7 +1911,7 @@ document.addEventListener("DOMContentLoaded", () => {
           );
 
 
-        /* CLICK PROFILE */
+        /* OPEN PROFILE */
 
         card.addEventListener(
           "click",
@@ -1737,86 +1936,90 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* FOLLOW */
 
-        button.addEventListener(
-          "click",
-          event => {
+        if (button) {
 
-            event.stopPropagation();
+          button.addEventListener(
+            "click",
+            event => {
 
-
-            const username =
-              card.dataset.username;
+              event.stopPropagation();
 
 
-            const user =
-              users.find(
-                item =>
-                  item.username ===
-                  username
-              );
+              const username =
+                card.dataset.username;
 
 
-            if (!user) {
-              return;
-            }
-
-
-            user.followingYou =
-              !user.followingYou;
-
-
-            if (
-              user.followingYou
-            ) {
-
-              user.followers++;
-
-              addFollowNotification(
-                user
-              );
-
-            }
-
-            else {
-
-              user.followers =
-                Math.max(
-                  0,
-                  user.followers - 1
-                );
-
-
-              notifications =
-                notifications.filter(
+              const user =
+                users.find(
                   item =>
-                    item.userId !==
-                    user.id
+                    item.username ===
+                    username
                 );
 
 
-              saveNotifications();
+              if (!user) {
+                return;
+              }
 
-              renderNotifications();
 
-              updateMessageBadge();
+              user.followingYou =
+                !user.followingYou;
+
+
+              if (
+                user.followingYou
+              ) {
+
+                user.followers++;
+
+                addFollowNotification(
+                  user
+                );
+
+              } else {
+
+                user.followers =
+                  Math.max(
+                    0,
+                    user.followers - 1
+                  );
+
+
+                notifications =
+                  notifications.filter(
+                    item =>
+                      item.userId !==
+                      user.id
+                  );
+
+
+                saveNotifications();
+
+                renderNotifications();
+
+                renderMessages();
+
+                updateMessageBadge();
+
+              }
+
+
+              saveUsers();
+
+              updateFollowButtons();
 
             }
+          );
 
-
-            saveUsers();
-
-            updateFollowButtons();
-
-          }
-        );
+        }
 
       }
     );
 
 
-  /* =========================
+  /* =====================================================
      NOTIFICATION PROFILE CLICK
-  ========================= */
+  ===================================================== */
 
   if (notificationsList) {
 
@@ -1845,9 +2048,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =========================
-     PROFILE BACK BUTTON
-  ========================= */
+  /* =====================================================
+     PROFILE BACK
+  ===================================================== */
 
   if (profileBackBtn) {
 
@@ -1855,9 +2058,13 @@ document.addEventListener("DOMContentLoaded", () => {
       "click",
       () => {
 
-        userProfilePage.classList.add(
-          "hidden-page"
-        );
+        if (userProfilePage) {
+
+          userProfilePage.classList.add(
+            "hidden-page"
+          );
+
+        }
 
 
         document
@@ -1916,9 +2123,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =========================
-     RENDER OWN PROFILE
-  ========================= */
+  /* =====================================================
+     OWN PROFILE
+  ===================================================== */
 
   function renderProfilePage() {
 
@@ -2031,9 +2238,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =========================
-     NAVIGATION
-  ========================= */
+  /* =====================================================
+     MAIN NAVIGATION
+  ===================================================== */
 
   navItems.forEach(
     item => {
@@ -2086,6 +2293,8 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
 
+          /* NOTIFICATIONS */
+
           if (
             pageName ===
             "notifications"
@@ -2098,6 +2307,20 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
 
+          /* MESSAGES */
+
+          if (
+            pageName ===
+            "messages"
+          ) {
+
+            renderMessages();
+
+          }
+
+
+          /* PROFILE */
+
           if (
             pageName ===
             "profile"
@@ -2107,6 +2330,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
           }
 
+
+          /* HOME */
 
           if (
             pageName ===
@@ -2133,9 +2358,9 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
 
-  /* =========================
+  /* =====================================================
      MOBILE NAVIGATION
-  ========================= */
+  ===================================================== */
 
   document
     .querySelectorAll(
@@ -2210,6 +2435,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (
               pageName ===
+              "messages"
+            ) {
+
+              renderMessages();
+
+            }
+
+
+            if (
+              pageName ===
               "profile"
             ) {
 
@@ -2234,11 +2469,16 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
 
-  /* =========================
+  /* =====================================================
      POST BUTTONS
-  ========================= */
+  ===================================================== */
 
   function focusComposer() {
+
+    if (!postInput) {
+      return;
+    }
+
 
     postInput.focus();
 
@@ -2254,56 +2494,70 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  sidebarPost.addEventListener(
-    "click",
-    focusComposer
-  );
+  if (sidebarPost) {
+
+    sidebarPost.addEventListener(
+      "click",
+      focusComposer
+    );
+
+  }
 
 
-  mobilePost.addEventListener(
-    "click",
-    focusComposer
-  );
+  if (mobilePost) {
+
+    mobilePost.addEventListener(
+      "click",
+      focusComposer
+    );
+
+  }
 
 
-  /* =========================
+  /* =====================================================
      LOGOUT
-  ========================= */
+  ===================================================== */
 
-  logoutBtn.addEventListener(
-    "click",
-    () => {
+  if (logoutBtn) {
 
-      const confirmLogout =
-        confirm(
-          "Log out of this account?"
+    logoutBtn.addEventListener(
+      "click",
+      () => {
+
+        const confirmLogout =
+          confirm(
+            "Log out of this account?"
+          );
+
+
+        if (!confirmLogout) {
+          return;
+        }
+
+
+        localStorage.removeItem(
+          "loggedIn"
         );
 
 
-      if (!confirmLogout) {
-        return;
+        window.location.href =
+          "login.html";
+
       }
+    );
+
+  }
 
 
-      localStorage.removeItem(
-        "loggedIn"
-      );
-
-
-      window.location.href =
-        "login.html";
-
-    }
-  );
-
-
-  /* =========================
-     INITIAL RENDER
-  ========================= */
+  /* =====================================================
+     INITIAL LOAD
+  ===================================================== */
 
   renderPosts();
 
   renderNotifications();
+
+  renderMessages();
 
   renderProfilePage();
 
