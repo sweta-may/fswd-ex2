@@ -36,8 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     {
       id: 1,
-      name: "Alex Johnson",
-      username: "@alex",
+      name: "Sahana Radhakrishnan",
+      username: "@sahanar",
       avatar: "A",
       verified: true,
       text: "Building something new today. Sometimes the smallest ideas turn into the biggest projects. 🚀",
@@ -53,8 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     {
       id: 2,
-      name: "Sarah Chen",
-      username: "@sarahchen",
+      name: "Sowmiya Lakshmi",
+      username: "@sowmi",
       avatar: "S",
       verified: true,
       text: "The web keeps getting more interesting. There is so much we can build when good design and good technology come together.",
@@ -70,8 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     {
       id: 3,
-      name: "David Smith",
-      username: "@davidsmith",
+      name: "Oviyaa SM",
+      username: "@oviyaasm",
       avatar: "D",
       verified: false,
       text: "What's one technology you think will completely change the way we work over the next five years?",
@@ -297,7 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     const username =
-      localStorage.getItem("username") || "Alex";
+      localStorage.getItem("username") || "Sweta";
 
 
     const newPost = {
