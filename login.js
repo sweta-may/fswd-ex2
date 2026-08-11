@@ -1,27 +1,41 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
-    const redirect = function () {
-        localStorage.setItem('loggedIn', 'true');
-        window.location.href = 'index.html';
-    };
+﻿document.addEventListener("DOMContentLoaded", () => {
 
-    const phoneBtn = document.getElementById('phone-btn');
-    const googleBtn = document.getElementById('google-btn');
-    const appleBtn = document.getElementById('apple-btn');
-    const loginForm = document.getElementById('login-form');
+  const form = document.getElementById("login-form");
+  const googleBtn = document.getElementById("google-btn");
+  const appleBtn = document.getElementById("apple-btn");
 
-    if (phoneBtn) phoneBtn.addEventListener('click', redirect);
-    if (googleBtn) googleBtn.addEventListener('click', redirect);
-    if (appleBtn) appleBtn.addEventListener('click', redirect);
+  function login() {
+    localStorage.setItem("loggedIn", "true");
 
-    if (loginForm) {
-        loginForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-            redirect();
-        });
-    }
+    const username =
+      document.getElementById("username")?.value.trim() || "Alex";
 
-    const loggedIn = localStorage.getItem('loggedIn');
-    if (loggedIn === 'true') {
-        window.location.href = 'index.html';
-    }
+    localStorage.setItem("username", username);
+
+    window.location.href = "index.html";
+  }
+
+
+  if (form) {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      login();
+    });
+  }
+
+
+  if (googleBtn) {
+    googleBtn.addEventListener("click", login);
+  }
+
+
+  if (appleBtn) {
+    appleBtn.addEventListener("click", login);
+  }
+
+
+  if (localStorage.getItem("loggedIn") === "true") {
+    window.location.href = "index.html";
+  }
+
 });

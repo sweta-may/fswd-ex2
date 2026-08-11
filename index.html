@@ -1,41 +1,293 @@
 ﻿<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Home</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontisto/3.0.4/css/fontisto.min.css" integrity="sha512-BK7gVjtpI03rzn2PXIJKa2Eq2GehYBWEzEFt0L2rXtjEQ4EYuYulpnrDCclBv7dzfD0mJ0M7jYNE63FVMKVa7g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/fontisto/3.0.4/css/fontisto.min.css"
+    integrity="sha512-BK7gVjtpI03rzn2PXIJKa2Eq2GehYBWEzEFt0L2rXtjEQ4EYuYulpnrDCclBv7dzfD0mJ0M7jYNE63FVMKVa7g=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  >
+
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <div class="index-wrapper">
-    <main class="index-main">
-      <section class="top-search">
-        <div class="search-input-wrapper">
-          <i class="fi fi-br-search search-icon"></i>
-          <input class="search-input" type="search" placeholder="Search">
+
+<div class="app">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="brand">
+      <span class="brand-x">𝕏</span>
+    </div>
+
+    <nav class="side-nav">
+
+      <button class="nav-item active">
+        <i class="fi fi-rr-home"></i>
+        <span>Home</span>
+      </button>
+
+      <button class="nav-item">
+        <i class="fi fi-br-search"></i>
+        <span>Explore</span>
+      </button>
+
+      <button class="nav-item">
+        <i class="fi fi-rr-bell"></i>
+        <span>Notifications</span>
+      </button>
+
+      <button class="nav-item">
+        <i class="fi fi-rr-paper-plane"></i>
+        <span>Messages</span>
+      </button>
+
+      <button class="nav-item">
+        <i class="fi fi-rr-bookmark"></i>
+        <span>Bookmarks</span>
+      </button>
+
+      <button class="nav-item">
+        <i class="fi fi-rr-user"></i>
+        <span>Profile</span>
+      </button>
+
+    </nav>
+
+    <button class="sidebar-post" id="sidebar-post">
+      Post
+    </button>
+
+    <button class="account-area" id="logout-btn">
+      <div class="avatar">A</div>
+
+      <div class="account-info">
+        <strong>Alex</strong>
+        <span>@alex</span>
+      </div>
+
+      <span class="more">•••</span>
+    </button>
+
+  </aside>
+
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- MOBILE HEADER -->
+    <header class="mobile-header">
+      <div class="avatar small-avatar">A</div>
+      <strong>Home</strong>
+      <span class="brand-x">𝕏</span>
+    </header>
+
+
+    <!-- SEARCH -->
+    <section class="top-search">
+
+      <div class="search-input-wrapper">
+
+        <i class="fi fi-br-search search-icon"></i>
+
+        <input
+          class="search-input"
+          id="search-input"
+          type="search"
+          placeholder="Search"
+          autocomplete="off"
+        >
+
+      </div>
+
+    </section>
+
+
+    <!-- TABS -->
+    <section class="tabs">
+
+      <button class="tab-item active" data-tab="for-you">
+        For you
+      </button>
+
+      <button class="tab-item" data-tab="following">
+        Following
+      </button>
+
+    </section>
+
+
+    <!-- COMPOSER -->
+    <section class="composer">
+
+      <div class="avatar">A</div>
+
+      <div class="composer-content">
+
+        <textarea
+          id="post-input"
+          placeholder="What is happening?!"
+          maxlength="280"
+          rows="2"
+        ></textarea>
+
+        <div class="composer-bottom">
+
+          <div class="composer-icons">
+            <button title="Add image">
+              <i class="fi fi-rr-picture"></i>
+            </button>
+
+            <button title="Add GIF">
+              <i class="fi fi-rr-play"></i>
+            </button>
+
+            <button title="Add emoji">
+              <i class="fi fi-rr-smile"></i>
+            </button>
+
+            <button title="Add location">
+              <i class="fi fi-rr-marker"></i>
+            </button>
+          </div>
+
+          <button id="post-btn" class="post-btn" disabled>
+            Post
+          </button>
+
         </div>
-      </section>
 
-      <section class="tabs">
-        <div class="tab-item active">For you</div>
-        <div class="tab-item">Following</div>
-      </section>
+      </div>
 
-      <section class="feed-card">
-        <h2>Welcome back</h2>
-        <p>Here is your home feed. Tap the new post button to share something with your followers.</p>
-      </section>
-    </main>
+    </section>
 
-    <footer class="index-footer">
-      <button class="footer-btn"><i class="fi fi-rr-phone-call"></i></button>
-      <button class="footer-btn"><i class="fi fi-rr-bell"></i></button>
-      <button class="footer-btn new-post"><i class="fi fi-rr-phone-call"></i></button>
-      <button class="footer-btn"><i class="fi fi-rr-paper-plane"></i></button>
-      <button class="footer-btn"><i class="fi fi-rr-user"></i></button>
-    </footer>
-  </div>
-  <script src="script.js"></script> 
+
+    <!-- FEED -->
+    <section id="feed" class="feed">
+
+      <!-- POSTS ARE INSERTED BY JAVASCRIPT -->
+
+    </section>
+
+  </main>
+
+
+  <!-- RIGHT SIDEBAR -->
+  <aside class="right-sidebar">
+
+    <div class="trends-box">
+
+      <h2>What's happening</h2>
+
+      <div class="trend">
+        <span>Trending</span>
+        <strong>#Technology</strong>
+        <small>24.8K posts</small>
+      </div>
+
+      <div class="trend">
+        <span>Trending in Technology</span>
+        <strong>Artificial Intelligence</strong>
+        <small>18.2K posts</small>
+      </div>
+
+      <div class="trend">
+        <span>Trending</span>
+        <strong>#WebDevelopment</strong>
+        <small>12.4K posts</small>
+      </div>
+
+      <div class="trend">
+        <span>Trending</span>
+        <strong>JavaScript</strong>
+        <small>9,821 posts</small>
+      </div>
+
+      <button class="show-more">
+        Show more
+      </button>
+
+    </div>
+
+
+    <div class="follow-box">
+
+      <h2>Who to follow</h2>
+
+      <div class="follow-user">
+        <div class="avatar">S</div>
+
+        <div>
+          <strong>Sarah Chen</strong>
+          <span>@sarahchen</span>
+        </div>
+
+        <button>Follow</button>
+      </div>
+
+      <div class="follow-user">
+        <div class="avatar">D</div>
+
+        <div>
+          <strong>David Smith</strong>
+          <span>@davidsmith</span>
+        </div>
+
+        <button>Follow</button>
+      </div>
+
+      <div class="follow-user">
+        <div class="avatar">M</div>
+
+        <div>
+          <strong>Maya Patel</strong>
+          <span>@mayapatel</span>
+        </div>
+
+        <button>Follow</button>
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MOBILE BOTTOM NAV -->
+  <footer class="mobile-footer">
+
+    <button class="footer-btn active">
+      <i class="fi fi-rr-home"></i>
+    </button>
+
+    <button class="footer-btn">
+      <i class="fi fi-br-search"></i>
+    </button>
+
+    <button class="footer-btn new-post" id="mobile-post">
+      <i class="fi fi-rr-edit"></i>
+    </button>
+
+    <button class="footer-btn">
+      <i class="fi fi-rr-bell"></i>
+    </button>
+
+    <button class="footer-btn">
+      <i class="fi fi-rr-user"></i>
+    </button>
+
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
